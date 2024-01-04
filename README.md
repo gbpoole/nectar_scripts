@@ -1,4 +1,4 @@
-# CAS-eResearch Gitlab Application
+# Nectar VM scripts
 
 ## Installation on Nectar VM
 
