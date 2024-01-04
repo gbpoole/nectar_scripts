@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-pip install python-openstackclient python-designateclient
+python3 -m pip install python-openstackclient python-designateclient

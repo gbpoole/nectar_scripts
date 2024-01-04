@@ -54,17 +54,20 @@ In what follows, you will need the following, once the VM is instantiated:
     ```
     git clone git@github.com:gbpoole/REPO.git
     ```
-    * Optionally, if you will edit the code locally, you'll want to do the following:
+    * [Optionally] if you will edit the code locally, you'll want to do the following:
     ```
     git config --global user.name "Your Name"
     git config --global user.email "your@email.address"
     git config --global core.editor "vi"
+    ```
+    and from within the REPO:
+    ```
     git remote set-url origin git@github.com:gbpoole/REPO.git
     ```
 
 ## Install requirements
 
-* Install Docker with (enter y-and-return when prompted): 
+* [Optionally] Install Docker with (enter y-and-return when prompted): 
   ```
   sudo ~/nectar_scripts/install_Docker_on_Ubuntu.sh
   ```
@@ -72,17 +75,10 @@ In what follows, you will need the following, once the VM is instantiated:
   ```
   sudo ~/nectar_scripts/install_Python_on_Ubuntu.sh
   ```
-* Install the OpenStack client:
+* Create a virtual environment and activate it:
   ```
-  sudo ~/nectar_scripts/install_OpenStack_client.sh
-  ```
-* Install certbot (enter y-and-return when prompted):
-  ```
-  sudo ~/nectar_scripts/install_certbot_on_Ubuntu.sh
-  ```
-* Install Nginx (enter y-and-return when prompted):
-  ```
-  sudo ~/nectar_scripts/install_Nginx_on_Ubuntu.sh
+  python3 -m venv venv
+  . venv/bin/activate
   ```
 * Install Poetry with:
   ```
@@ -91,6 +87,18 @@ In what follows, you will need the following, once the VM is instantiated:
   and then add it to your path:
   ```
   export PATH="/home/ubuntu/.local/bin:$PATH"
+  ```
+* Install the OpenStack client:
+  ```
+  ~/nectar_scripts/install_OpenStack_client.sh
+  ```
+* Install certbot (enter y-and-return when prompted):
+  ```
+  sudo ~/nectar_scripts/install_certbot_on_Ubuntu.sh
+  ```
+* Install Nginx (enter y-and-return when prompted):
+  ```
+  sudo ~/nectar_scripts/install_Nginx_on_Ubuntu.sh
   ```
 
 ## Set-up DNS name
@@ -114,15 +122,20 @@ In what follows, you will need the following, once the VM is instantiated:
         ```
         openstack recordset create <project>.cloud.edu.au. <instance name> --type A --record <instance IP addr>
         ```
+    ``` [!NOTE]
     * If a "Duplicate Record Set" error is thrown, then you need to delete the old one first:
         ```
         openstack recordset delete <project>.cloud.edu.au.  <instance name>.<project>.cloud.edu.au.
         ```
     * then, retry the openstack recordset create command above
+    ```
 
 ## Set-up Nginx
 
-* Verify that Nginx registered itself as a service with ufw when it installed: sudo ufw app list
+* Verify that Nginx registered itself as a service with ufw when it installed:
+    ```
+    sudo ufw app list
+    ```
 	* You should see something like:
 
         > Available applications:
@@ -135,7 +148,10 @@ In what follows, you will need the following, once the VM is instantiated:
         >
         >   OpenSSH
 
-* Verify that Nginx was started at the install: systemctl status nginx
+* Verify that Nginx was started at the install:
+    ```
+    systemctl status nginx
+    ```
 	* You should see something like:
 
         > ● nginx.service - A high performance web server and a reverse proxy server
