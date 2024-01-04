@@ -107,7 +107,7 @@ In what follows, you will need the following, once the VM is instantiated:
         ```
         openstack recordset create <project>.cloud.edu.au. <instance name> --type A --record <instance IP addr>
         ```
-    * If a "Duplicate RecordSet" error is thrown, then you need to delete the old one first:
+    * If a "Duplicate Record Set" error is thrown, then you need to delete the old one first:
         ```
         openstack recordset delete <project>.cloud.edu.au.  <instance name>.<project>.cloud.edu.au.
         ```
@@ -118,78 +118,99 @@ In what follows, you will need the following, once the VM is instantiated:
 * Verify that Nginx registered itself as a service with ufw when it installed: sudo ufw app list
 	* You should see something like:
 
-    > Available applications:
-    >
-    >   Nginx Full
-    >
-    >   Nginx HTTP
-    >
-    >   Nginx HTTPS
-    >
-    >   OpenSSH
+        > Available applications:
+        >
+        >   Nginx Full
+        >
+        >   Nginx HTTP
+        >
+        >   Nginx HTTPS
+        >
+        >   OpenSSH
 
 * Verify that Nginx was started at the install: systemctl status nginx
 	* You should see something like:
 
-    > ● nginx.service - A high performance web server and a reverse proxy server
-    >
-    >      Loaded: loaded (/lib/systemd/system/nginx.service; enabled; vendor preset: enabled)
-    >
-    >      Active: active (running) since Wed 2022-08-03 04:35:19 UTC; 3min 17s ago
-    >
-    >        Docs: man:nginx(8)
-    >
-    >     Process: 44621 ExecStartPre=/usr/sbin/nginx -t -q -g daemon on; master_process on; (code=exited, status=0/SUCCESS)
-    >
-    >     Process: 44631 ExecStart=/usr/sbin/nginx -g daemon on; master_process on; (code=exited, status=0/SUCCESS)
-    >
-    >    Main PID: 44632 (nginx)
-    >
-    >       Tasks: 2 (limit: 1144)
-    >
-    >      Memory: 5.1M
-    >
-    >      CGroup: /system.slice/nginx.service
-    >
-    >              ├─44632 nginx: master process /usr/sbin/nginx -g daemon on; master_process on;
-    >
-    >              └─44633 nginx: worker process
-    >
-    > 
-    >
-    > Aug 03 04:35:19 cas-eresearch-slack systemd[1]: Starting A high performance web server and a reverse proxy server...
-    >
-    > Aug 03 04:35:19 cas-eresearch-slack systemd[1]: Started A high performance web server and a reverse proxy server.
+        > ● nginx.service - A high performance web server and a reverse proxy server
+        >
+        >      Loaded: loaded (/lib/systemd/system/nginx.service; enabled; vendor preset: enabled)
+        >
+        >      Active: active (running) since Wed 2022-08-03 04:35:19 UTC; 3min 17s ago
+        >
+        >        Docs: man:nginx(8)
+        >
+        >     Process: 44621 ExecStartPre=/usr/sbin/nginx -t -q -g daemon on; master_process on; (code=exited, status=0/SUCCESS)
+        >
+        >     Process: 44631 ExecStart=/usr/sbin/nginx -g daemon on; master_process on; (code=exited, status=0/SUCCESS)
+        >
+        >    Main PID: 44632 (nginx)
+        >
+        >       Tasks: 2 (limit: 1144)
+        >
+        >      Memory: 5.1M
+        >
+        >      CGroup: /system.slice/nginx.service
+        >
+        >              ├─44632 nginx: master process /usr/sbin/nginx -g daemon on; master_process on;
+        >
+        >              └─44633 nginx: worker process
+        >
+        > 
+        >
+        > Aug 03 04:35:19 cas-eresearch-slack systemd[1]: Starting A high performance web server and a reverse proxy server...
+        >
+        > Aug 03 04:35:19 cas-eresearch-slack systemd[1]: Started A high performance web server and a reverse proxy server.
 
-* Copy Nginx config files into place: sudo cp scripts/nginx.config /etc/nginx/sites-available/cas-eresearch-slack
-* Make a link to this file: sudo ln -s /etc/nginx/sites-available/cas-eresearch-slack /etc/nginx/sites-enabled/
-* remove the default site (note, a copy will remain at rm /etc/nginx/sites-available/default if you need it): sudo rm /etc/nginx/sites-enabled/default
-* Restart Nginx: sudo systemctl restart nginx.service
-* Start site: gunicorn -b 0.0.0.0:8080 -w 4 -k uvicorn.workers.UvicornWorker app.main:app
+* Copy Nginx config files into place:
+    ```
+    sudo cp scripts/nginx.config /etc/nginx/sites-available/cas-eresearch-slack
+    ```
+* Make a link to this file:
+    ```
+    sudo ln -s /etc/nginx/sites-available/cas-eresearch-slack /etc/nginx/sites-enabled/
+    ```
+* remove the default site (note, a copy will remain at rm /etc/nginx/sites-available/default if you need it):
+    ```
+    sudo rm /etc/nginx/sites-enabled/default
+    ```
+* Restart Nginx:
+    ```
+    sudo systemctl restart nginx.service
+    ```
+* Start site:
+    ```
+    gunicorn -b 0.0.0.0:8080 -w 4 -k uvicorn.workers.UvicornWorker app.main:app
+    ```
 
 ## Set-up a "Let's Encrypt" Certificate
 
-** Certbot only works with Python 3.5 to 3.8, so watch-out for the install of Python 3.10 above! **
-** The following commands, for switching python3 versions might be handy: sudo update-alternatives  --set python3 /usr/bin/python3.10 and sudo update-alternatives  --set python3 /usr/bin/python3.8 **
+* Certbot only works with Python 3.5 to 3.8, so watch-out for the install of Python 3.10 above!
+* The following commands, for switching python3 versions might be handy:
+    ```
+    sudo update-alternatives --set python3 /usr/bin/python3.10
+    ```
+    ```
+    sudo update-alternatives --set python3 /usr/bin/python3.8
+    ```
 
 * Create a new venv and run certbot from there:
-```
-python3 -m venv myenv
-```
-```
-. ./myenv/bin/activate
-```
-```
-pip3 install certbot certbot-nginx
-```
-```
-sudo myenv/bin/certbot --nginx -d cas-eresearch-slack.adacs-gpoole.cloud.edu.au
-```
+    ```
+    python3 -m venv myenv
+    ```
+    ```
+    . ./myenv/bin/activate
+    ```
+    ```
+    pip3 install certbot certbot-nginx
+    ```
+    ```
+    sudo myenv/bin/certbot --nginx -d cas-eresearch-slack.adacs-gpoole.cloud.edu.au
+    ```
 
 * For a 1-time renewal:
-```
-sudo certbot renew
-```
+    ```
+    sudo certbot renew
+    ```
 
 ## Auto-renewal of SSL
 
