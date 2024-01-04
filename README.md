@@ -9,10 +9,15 @@ The following instructions have been validated with a Nectar VM configured as fo
 * Security Groups: `Add SSL Security Group` which supplies:
 
     > ALLOW IPv4 22/tcp from 0.0.0.0/0
+    >
     > ALLOW IPv4 443/tcp from 0.0.0.0/0
+    >
     > ALLOW IPv4 80/tcp from 0.0.0.0/0
+    >
     > ALLOW IPv6 to ::/0
+    >
     > ALLOW IPv4 to 0.0.0.0/0
+    >
     > ALLOW IPv4 8080/tcp from 0.0.0.0/0
 
 ## VM Config
