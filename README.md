@@ -4,11 +4,11 @@
 
 The following instructions have been validated with a Nectar VM configured as follows:
 
-Flavour Name: t3.xsmall
+Flavour Name: `t3.xsmall`
 
-Image Name: NeCTAR Ubuntu 22.04 LTS (Jammy) amd64
+Image Name: `NeCTAR Ubuntu 22.04 LTS (Jammy) amd64`
 
-Security Groups: Add SSL Security Group which supplies:
+Security Groups: `Add SSL Security Group` which supplies:
 
 > ALLOW IPv4 22/tcp from 0.0.0.0/0
 > ALLOW IPv4 443/tcp from 0.0.0.0/0
@@ -35,30 +35,59 @@ In what follows, you will need the following, once the VM is instantiated:
     * Clone the REPO: git clone git@github.com:gbpoole/REPO.git
     * Optionally, if you will edit the code locally, you'll want to do the following:
 
-`git config --global user.name "Your Name"`
-`git config --global user.email "your@email.address"`
-`git config --global core.editor "vi"`
-`git remote set-url origin git@github.com:gbpoole/REPO.git`
+        ```
+        git config --global user.name "Your Name"
+        git config --global user.email "your@email.address"
+        git config --global core.editor "vi"
+        git remote set-url origin git@github.com:gbpoole/REPO.git
+        ```
 
-# Install requirements
+### Install requirements
 
-* Install Docker with: sudo ./install_Docker_on_Ubuntu.sh (enter y-and-return when prompted)
-* Install Python with: sudo ./install_Python_on_Ubuntu.sh (enter y-and-return when prompted)
-* Install the OpenStack client: sudo ./install_OpenStack_client.sh
-* Install certbot: sudo ./install_certbot_on_Ubuntu.sh (enter y-and-return when prompted)
-* Install Nginx: sudo ./install_Nginx_on_Ubuntu.sh (enter y-and-return when prompted)
-* Install Poetry with: sudo ./install_Poetry.sh
+* Install Docker with: 
+    ```
+    sudo ./install_Docker_on_Ubuntu.sh (enter y-and-return when prompted)
+    ```
+* Install Python with:
+    ```
+    sudo ./install_Python_on_Ubuntu.sh (enter y-and-return when prompted)
+    ```
+* Install the OpenStack client:
+    ```
+    sudo ./install_OpenStack_client.sh```
+    ```
+* Install certbot:
+    ```
+    sudo ./install_certbot_on_Ubuntu.sh (enter y-and-return when prompted)
+    ```
+* Install Nginx:
+    ```
+    sudo ./install_Nginx_on_Ubuntu.sh (enter y-and-return when prompted)
+    ```
+* Install Poetry with:
+    ```
+    sudo ./install_Poetry.sh
+    ```
 
 ### Set-up DNS name
 
-* Install Open Stack CLI client:
+1. Install `Open Stack CLI` client:
 	* Obtain Open Stack rc file from the dashboard: from the top bar, click on email and then OpenStack rc file download
-	* scp rc file to the VM: scp rc-file-name.sh ubuntu@IP_ADDRESS:/home/ubuntu/
-	* source the file on the VM: . rc-file-name.sh (enter project password when asked)
-* Execute the following with the client:
-	* check that your project has the default zone as follows: $ openstack zone list
-	* add a DNS record for your instance to the zone as follows: $ openstack recordset create <project>.cloud.edu.au. <instance name> --type A --record <instance IP addr>
-		* If a "Duplicate RecordSet" error is thrown, then you need to delete the old one first: openstack recordset delete <project>.cloud.edu.au.  <instance name>.<project>.cloud.edu.au.
+	* scp rc file to the VM: `scp rc-file-name.sh ubuntu@IP_ADDRESS:/home/ubuntu/`
+	* source the file on the VM: `. rc-file-name.sh (enter project password when asked)`
+2. Execute the following with the client:
+	* check that your project has the default zone as follows: 
+    ```
+    openstack zone list
+    ```
+	* add a DNS record for your instance to the zone as follows:
+    ```
+    openstack recordset create <project>.cloud.edu.au. <instance name> --type A --record <instance IP addr>
+    ```
+		* If a "Duplicate RecordSet" error is thrown, then you need to delete the old one first:
+        ```
+        openstack recordset delete <project>.cloud.edu.au.  <instance name>.<project>.cloud.edu.au.
+        ```
 		* then, retry the openstack recordset create command above
 
 ### Set-up Nginx
