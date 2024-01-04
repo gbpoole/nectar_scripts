@@ -63,27 +63,27 @@ In what follows, you will need the following, once the VM is instantiated:
 
 * Install Docker with (enter y-and-return when prompted): 
   ```
-  sudo ./install_Docker_on_Ubuntu.sh
+  sudo ~/nectar_scripts/install_Docker_on_Ubuntu.sh
   ```
 * Install Python with (enter y-and-return when prompted):
   ```
-  sudo ./install_Python_on_Ubuntu.sh
+  sudo ~/nectar_scripts/install_Python_on_Ubuntu.sh
   ```
 * Install the OpenStack client:
   ```
-  sudo ./install_OpenStack_client.sh
+  sudo ~/nectar_scripts/install_OpenStack_client.sh
   ```
 * Install certbot (enter y-and-return when prompted):
   ```
-  sudo ./install_certbot_on_Ubuntu.sh
+  sudo ~/nectar_scripts/install_certbot_on_Ubuntu.sh
   ```
 * Install Nginx (enter y-and-return when prompted):
   ```
-  sudo ./install_Nginx_on_Ubuntu.sh
+  sudo ~/nectar_scripts/install_Nginx_on_Ubuntu.sh
   ```
 * Install Poetry with:
   ```
-  sudo ./install_Poetry.sh
+  sudo ~/nectar_scripts/install_Poetry.sh
   ```
 
 ## Set-up DNS name
@@ -198,7 +198,7 @@ In what follows, you will need the following, once the VM is instantiated:
     python3 -m venv myenv
     ```
     ```
-    . ./myenv/bin/activate
+    . ~/nectar_scripts/myenv/bin/activate
     ```
     ```
     pip3 install certbot certbot-nginx
@@ -261,7 +261,7 @@ In what follows, you will need the following, once the VM is instantiated:
     ```
 * Create a venv (if not done already):
     ```
-    ./scripts/create_venv.sh
+    ~/nectar_scripts/scripts/create_venv.sh
     ```
 * Source venv:
     ```
