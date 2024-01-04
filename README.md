@@ -123,12 +123,14 @@ In what follows, you will need the following, once the VM is instantiated:
         openstack recordset create <project>.cloud.edu.au. <instance name> --type A --record <instance IP addr>
         ```
 
-    > [!NOTE]
-    > * If a "Duplicate Record Set" error is thrown, then you need to delete the old one first:
-    >     ```
-    >     openstack recordset delete <project>.cloud.edu.au.  <instance name>.<project>.cloud.edu.au.
-    >     ```
-    > * then, retry the openstack recordset create command above
+> [!NOTE]
+> If a "Duplicate Record Set" error is thrown, then you need to delete the old one first:
+>
+>     ```
+>     openstack recordset delete <project>.cloud.edu.au.  <instance name>.<project>.cloud.edu.au.
+>     ```
+>
+> then, retry the openstack recordset create command above
 
 ## Set-up Nginx
 
