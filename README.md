@@ -8,21 +8,21 @@ The following instructions have been validated with a Nectar VM configured as fo
 * Image Name: `NeCTAR Ubuntu 22.04 LTS (Jammy) amd64`
 * Security Groups: `Add SSL Security Group` which supplies:
 
-    >>> ALLOW IPv4 22/tcp from 0.0.0.0/0
-    >>> ALLOW IPv4 443/tcp from 0.0.0.0/0
-    >>> ALLOW IPv4 80/tcp from 0.0.0.0/0
-    >>> ALLOW IPv6 to ::/0
-    >>> ALLOW IPv4 to 0.0.0.0/0
-    >>> ALLOW IPv4 8080/tcp from 0.0.0.0/0
+    > ALLOW IPv4 22/tcp from 0.0.0.0/0
+    > ALLOW IPv4 443/tcp from 0.0.0.0/0
+    > ALLOW IPv4 80/tcp from 0.0.0.0/0
+    > ALLOW IPv6 to ::/0
+    > ALLOW IPv4 to 0.0.0.0/0
+    > ALLOW IPv4 8080/tcp from 0.0.0.0/0
 
-### VM Config
+## VM Config
 
 In what follows, you will need the following, once the VM is instantiated:
 
 * IP Address: available from the dashboard
 * A project password to access the NeCTAR Cloud using the OpenStack API.  From the dashboard: > Settings > Reset Password
 
-### Repo install
+## Repo install
 
 * Locally:
     * Make sure your nectar key has been enabled locally with:
@@ -54,7 +54,7 @@ In what follows, you will need the following, once the VM is instantiated:
     git remote set-url origin git@github.com:gbpoole/REPO.git
     ```
 
-### Install requirements
+## Install requirements
 
 * Install Docker with (enter y-and-return when prompted): 
   ```
@@ -81,7 +81,7 @@ In what follows, you will need the following, once the VM is instantiated:
   sudo ./install_Poetry.sh
   ```
 
-### Set-up DNS name
+## Set-up DNS name
 
 1. Install `Open Stack CLI` client:
 	* Obtain Open Stack rc file from the dashboard: from the top bar, click on email and then OpenStack rc file download
@@ -108,7 +108,7 @@ In what follows, you will need the following, once the VM is instantiated:
         ```
     * then, retry the openstack recordset create command above
 
-### Set-up Nginx
+## Set-up Nginx
 
 * Verify that Nginx registered itself as a service with ufw when it installed: sudo ufw app list
 	* You should see something like:
@@ -162,7 +162,7 @@ In what follows, you will need the following, once the VM is instantiated:
 * Restart Nginx: sudo systemctl restart nginx.service
 * Start site: gunicorn -b 0.0.0.0:8080 -w 4 -k uvicorn.workers.UvicornWorker app.main:app
 
-### Set-up a "Let's Encrypt" Certificate
+## Set-up a "Let's Encrypt" Certificate
 
 ** Certbot only works with Python 3.5 to 3.8, so watch-out for the install of Python 3.10 above! **
 ** The following commands, for switching python3 versions might be handy: sudo update-alternatives  --set python3 /usr/bin/python3.10 and sudo update-alternatives  --set python3 /usr/bin/python3.8 **
@@ -186,7 +186,7 @@ sudo myenv/bin/certbot --nginx -d cas-eresearch-slack.adacs-gpoole.cloud.edu.au
 sudo certbot renew
 ```
 
-### Auto-renewal of SSL
+## Auto-renewal of SSL
 
 * Edit the following 2 files (`sudo vi`):
 
@@ -227,7 +227,7 @@ sudo certbot renew
     sudo systemctl status certbot.timer
     ```
 
-### Run an app
+## Run an app
 
 * Install Poetry.  Add to path:
     ```
