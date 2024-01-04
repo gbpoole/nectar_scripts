@@ -8,17 +8,12 @@ The following instructions have been validated with a Nectar VM configured as fo
 * Image Name: `NeCTAR Ubuntu 22.04 LTS (Jammy) amd64`
 * Security Groups: `Add SSL Security Group` which supplies:
 
-    > ALLOW IPv4 22/tcp from 0.0.0.0/0
-    >
-    > ALLOW IPv4 443/tcp from 0.0.0.0/0
-    >
-    > ALLOW IPv4 80/tcp from 0.0.0.0/0
-    >
-    > ALLOW IPv6 to ::/0
-    >
-    > ALLOW IPv4 to 0.0.0.0/0
-    >
-    > ALLOW IPv4 8080/tcp from 0.0.0.0/0
+    >>> ALLOW IPv4 22/tcp from 0.0.0.0/0
+    >>> ALLOW IPv4 443/tcp from 0.0.0.0/0
+    >>> ALLOW IPv4 80/tcp from 0.0.0.0/0
+    >>> ALLOW IPv6 to ::/0
+    >>> ALLOW IPv4 to 0.0.0.0/0
+    >>> ALLOW IPv4 8080/tcp from 0.0.0.0/0
 
 ### VM Config
 
@@ -30,20 +25,34 @@ In what follows, you will need the following, once the VM is instantiated:
 ### Repo install
 
 * Locally:
-    * Make sure your nectar key has been enabled locally with `ssh-add <path/to/key>`
-    * Copy a valid github key to the VM with: scp KEYNAME* ubuntu@IP_ADDRESS:/home/ubuntu/.ssh/
+    * Make sure your nectar key has been enabled locally with:
+    ```
+    ssh-add <path/to/key>
+    ```
+    * Copy a valid github key to the VM with:
+    ```
+    scp KEYNAME* ubuntu@IP_ADDRESS:/home/ubuntu/.ssh/
+    ```
 * On the VM:
-    * Start the ssh agent with: eval "$(ssh-agent)"
-    * Add the key to the agent: ssh-add .ssh/KEYNAME
-    * Clone the REPO: git clone git@github.com:gbpoole/REPO.git
+    * Start the ssh agent with:
+    ```
+    eval "$(ssh-agent)"
+    ```
+    * Add the key to the agent:
+    ```
+    ssh-add .ssh/KEYNAME
+    ```
+    * Clone the REPO: 
+    ```
+    git clone git@github.com:gbpoole/REPO.git
+    ```
     * Optionally, if you will edit the code locally, you'll want to do the following:
-
-        ```
-        git config --global user.name "Your Name"
-        git config --global user.email "your@email.address"
-        git config --global core.editor "vi"
-        git remote set-url origin git@github.com:gbpoole/REPO.git
-        ```
+    ```
+    git config --global user.name "Your Name"
+    git config --global user.email "your@email.address"
+    git config --global core.editor "vi"
+    git remote set-url origin git@github.com:gbpoole/REPO.git
+    ```
 
 ### Install requirements
 
