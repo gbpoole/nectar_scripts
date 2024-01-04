@@ -9,10 +9,15 @@ The following instructions have been validated with a Nectar VM configured as fo
 * Security Groups: `Add SSL Security Group` which supplies:
 
     > ALLOW IPv4 22/tcp from 0.0.0.0/0
+    >
     > ALLOW IPv4 443/tcp from 0.0.0.0/0
+    >
     > ALLOW IPv4 80/tcp from 0.0.0.0/0
+    >
     > ALLOW IPv6 to ::/0
+    >
     > ALLOW IPv4 to 0.0.0.0/0
+    >
     > ALLOW IPv4 8080/tcp from 0.0.0.0/0
 
 ### VM Config
@@ -110,48 +115,48 @@ In what follows, you will need the following, once the VM is instantiated:
 * Verify that Nginx registered itself as a service with ufw when it installed: sudo ufw app list
 	* You should see something like:
 
-> Available applications:
-
->   Nginx Full
-
->   Nginx HTTP
-
->   Nginx HTTPS
-
->   OpenSSH
+    > Available applications:
+    >
+    >   Nginx Full
+    >
+    >   Nginx HTTP
+    >
+    >   Nginx HTTPS
+    >
+    >   OpenSSH
 
 * Verify that Nginx was started at the install: systemctl status nginx
 	* You should see something like:
 
-> ● nginx.service - A high performance web server and a reverse proxy server
-
->      Loaded: loaded (/lib/systemd/system/nginx.service; enabled; vendor preset: enabled)
-
->      Active: active (running) since Wed 2022-08-03 04:35:19 UTC; 3min 17s ago
-
->        Docs: man:nginx(8)
-
->     Process: 44621 ExecStartPre=/usr/sbin/nginx -t -q -g daemon on; master_process on; (code=exited, status=0/SUCCESS)
-
->     Process: 44631 ExecStart=/usr/sbin/nginx -g daemon on; master_process on; (code=exited, status=0/SUCCESS)
-
->    Main PID: 44632 (nginx)
-
->       Tasks: 2 (limit: 1144)
-
->      Memory: 5.1M
-
->      CGroup: /system.slice/nginx.service
-
->              ├─44632 nginx: master process /usr/sbin/nginx -g daemon on; master_process on;
-
->              └─44633 nginx: worker process
-
-> 
-
-> Aug 03 04:35:19 cas-eresearch-slack systemd[1]: Starting A high performance web server and a reverse proxy server...
-
-> Aug 03 04:35:19 cas-eresearch-slack systemd[1]: Started A high performance web server and a reverse proxy server.
+    > ● nginx.service - A high performance web server and a reverse proxy server
+    >
+    >      Loaded: loaded (/lib/systemd/system/nginx.service; enabled; vendor preset: enabled)
+    >
+    >      Active: active (running) since Wed 2022-08-03 04:35:19 UTC; 3min 17s ago
+    >
+    >        Docs: man:nginx(8)
+    >
+    >     Process: 44621 ExecStartPre=/usr/sbin/nginx -t -q -g daemon on; master_process on; (code=exited, status=0/SUCCESS)
+    >
+    >     Process: 44631 ExecStart=/usr/sbin/nginx -g daemon on; master_process on; (code=exited, status=0/SUCCESS)
+    >
+    >    Main PID: 44632 (nginx)
+    >
+    >       Tasks: 2 (limit: 1144)
+    >
+    >      Memory: 5.1M
+    >
+    >      CGroup: /system.slice/nginx.service
+    >
+    >              ├─44632 nginx: master process /usr/sbin/nginx -g daemon on; master_process on;
+    >
+    >              └─44633 nginx: worker process
+    >
+    > 
+    >
+    > Aug 03 04:35:19 cas-eresearch-slack systemd[1]: Starting A high performance web server and a reverse proxy server...
+    >
+    > Aug 03 04:35:19 cas-eresearch-slack systemd[1]: Started A high performance web server and a reverse proxy server.
 
 * Copy Nginx config files into place: sudo cp scripts/nginx.config /etc/nginx/sites-available/cas-eresearch-slack
 * Make a link to this file: sudo ln -s /etc/nginx/sites-available/cas-eresearch-slack /etc/nginx/sites-enabled/
