@@ -48,37 +48,26 @@ In what follows, you will need the following, once the VM is instantiated:
 ### Install requirements
 
 * Install Docker with (enter y-and-return when prompted): 
-
     ```
     sudo ./install_Docker_on_Ubuntu.sh
     ```
-
 * Install Python with (enter y-and-return when prompted):
-
     ```
     sudo ./install_Python_on_Ubuntu.sh
     ```
-
 * Install the OpenStack client:
-
     ```
     sudo ./install_OpenStack_client.sh
     ```
-
 * Install certbot (enter y-and-return when prompted):
-
     ```
     sudo ./install_certbot_on_Ubuntu.sh
     ```
-
 * Install Nginx (enter y-and-return when prompted):
-
     ```
     sudo ./install_Nginx_on_Ubuntu.sh
     ```
-
 * Install Poetry with:
-
     ```
     sudo ./install_Poetry.sh
     ```
