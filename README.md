@@ -4,9 +4,9 @@
 
 The following instructions have been validated with a Nectar VM configured as follows:
 
-* Flavour Name: `t3.xsmall`
 * Image Name: `NeCTAR Ubuntu 22.04 LTS (Jammy) amd64`
-* Security Groups: `Add SSL Security Group` which supplies:
+* Flavour Name: `t3.xsmall`
+* Security Groups: Add `SSH, HTTP and HTTPS` security group, which supplies:
 
     > ALLOW IPv4 22/tcp from 0.0.0.0/0
     >
@@ -25,7 +25,7 @@ The following instructions have been validated with a Nectar VM configured as fo
 In what follows, you will need the following, once the VM is instantiated:
 
 * IP Address: available from the dashboard
-* A project password to access the NeCTAR Cloud using the OpenStack API.  From the dashboard: > Settings > Reset Password
+* A project password to access the NeCTAR Cloud using the OpenStack API.  Obtained by navigating to `<email>->Settings->Reset Password` and creating a new password.
 
 ## Repo install
 
@@ -43,11 +43,14 @@ In what follows, you will need the following, once the VM is instantiated:
     ```
     eval "$(ssh-agent)"
     ```
-    * Add the key to the agent:
+    * Add the key to the agent (submit password when asked):
     ```
     ssh-add .ssh/KEYNAME
     ```
-    * Clone the REPO: 
+    * Clone this REPO and the application REPO: 
+    ```
+    git clone git@github.com:gbpoole/nectar_scripts.git
+    ```
     ```
     git clone git@github.com:gbpoole/REPO.git
     ```
@@ -83,20 +86,24 @@ In what follows, you will need the following, once the VM is instantiated:
   ```
 * Install Poetry with:
   ```
-  sudo ~/nectar_scripts/install_Poetry.sh
+  ~/nectar_scripts/install_Poetry.sh
+  ```
+  and then add it to your path:
+  ```
+  export PATH="/home/ubuntu/.local/bin:$PATH"
   ```
 
 ## Set-up DNS name
 
 1. Install `Open Stack CLI` client:
-	* Obtain Open Stack rc file from the dashboard: from the top bar, click on email and then OpenStack rc file download
+	* Obtain Open Stack rc file from the dashboard: by clicking (in the top bar) on `<email>->OpenStack RC File`
 	* scp rc file to the VM:
         ```
-        scp rc-file-name.sh ubuntu@IP_ADDRESS:/home/ubuntu/
+        scp <rc-file-name.sh> ubuntu@IP_ADDRESS:/home/ubuntu/
         ```
 	* source the file on the VM (enter project password when asked):
         ```
-        . rc-file-name.sh
+        . <rc-file-name.sh>
         ```
 2. Execute the following with the client:
 	* check that your project has the default zone as follows: 
