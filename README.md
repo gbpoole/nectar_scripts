@@ -189,18 +189,12 @@ In what follows, you will need the following, once the VM is instantiated:
     sudo update-alternatives --set python3 /usr/bin/python3.8
     ```
 
-* Create a new venv and run certbot from there:
-    ```
-    python3 -m venv myenv
-    ```
-    ```
-    . ~/nectar_scripts/myenv/bin/activate
-    ```
+* Install and run certbot:
     ```
     pip3 install certbot certbot-nginx
     ```
     ```
-    sudo myenv/bin/certbot --nginx -d <dns-name>.adacs-gpoole.cloud.edu.au
+    sudo env/bin/certbot --nginx -d <dns-name>.adacs-gpoole.cloud.edu.au
     ```
 
 * For a 1-time renewal:
