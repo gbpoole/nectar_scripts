@@ -8,4 +8,4 @@ export PATH="/home/ubuntu/.local/bin:$PATH"
 
 # Set-up ssh keys
 eval "$(ssh-agent)"
-ssh-add .ssh/nectar_vm
+ssh-add ~/.ssh/nectar_vm
