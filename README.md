@@ -199,6 +199,10 @@ In what follows, you will need the following, once the VM is instantiated:
     ```
     sudo cp ~/nectar_scripts/certbot_renewal.* /etc/systemd/system
     ```
+* Set a user password (and keep a record of it):
+    ```
+    sudo passwd ubuntu
+    ```
 * Enable and start `certbot_renewal.timer`:
     ```
     systemctl enable --now certbot_renewal.timer
