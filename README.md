@@ -8,17 +8,12 @@ The following instructions have been validated with a Nectar VM configured as fo
 * Flavour Name: `t3.xsmall`
 * Security Groups: Add `SSH, HTTP and HTTPS` security group, which supplies:
 
-    > ALLOW IPv4 22/tcp from 0.0.0.0/0
-    >
-    > ALLOW IPv4 443/tcp from 0.0.0.0/0
-    >
-    > ALLOW IPv4 80/tcp from 0.0.0.0/0
-    >
-    > ALLOW IPv6 to ::/0
-    >
-    > ALLOW IPv4 to 0.0.0.0/0
-    >
-    > ALLOW IPv4 8080/tcp from 0.0.0.0/0
+    > ALLOW IPv4 22/tcp from 0.0.0.0/0  
+    > ALLOW IPv4 443/tcp from 0.0.0.0/0  
+    > ALLOW IPv4 80/tcp from 0.0.0.0/0  
+    > ALLOW IPv6 to ::/0  
+    > ALLOW IPv4 to 0.0.0.0/0  
+    > ALLOW IPv4 8080/tcp from 0.0.0.0/0  
 
 ## VM Config
 
@@ -182,17 +177,17 @@ In what follows, you will need the following, once the VM is instantiated:
         >
         > 
         >
-        > Aug 03 04:35:19 cas-eresearch-slack systemd[1]: Starting A high performance web server and a reverse proxy server...
+        > Aug 03 04:35:19 <dns-name> systemd[1]: Starting A high performance web server and a reverse proxy server...
         >
-        > Aug 03 04:35:19 cas-eresearch-slack systemd[1]: Started A high performance web server and a reverse proxy server.
+        > Aug 03 04:35:19 <dns-name> systemd[1]: Started A high performance web server and a reverse proxy server.
 
 * Copy Nginx config files into place:
     ```
-    sudo cp scripts/nginx.config /etc/nginx/sites-available/cas-eresearch-slack
+    sudo cp ~/nectar_scripts/nginx.config /etc/nginx/sites-available/<dns-name>
     ```
 * Make a link to this file:
     ```
-    sudo ln -s /etc/nginx/sites-available/cas-eresearch-slack /etc/nginx/sites-enabled/
+    sudo ln -s /etc/nginx/sites-available/<dns-name> /etc/nginx/sites-enabled/
     ```
 * remove the default site (note, a copy will remain at rm /etc/nginx/sites-available/default if you need it):
     ```
@@ -201,10 +196,6 @@ In what follows, you will need the following, once the VM is instantiated:
 * Restart Nginx:
     ```
     sudo systemctl restart nginx.service
-    ```
-* Start site:
-    ```
-    gunicorn -b 0.0.0.0:8080 -w 4 -k uvicorn.workers.UvicornWorker app.main:app
     ```
 
 ## Set-up a "Let's Encrypt" Certificate
@@ -229,7 +220,7 @@ In what follows, you will need the following, once the VM is instantiated:
     pip3 install certbot certbot-nginx
     ```
     ```
-    sudo myenv/bin/certbot --nginx -d cas-eresearch-slack.adacs-gpoole.cloud.edu.au
+    sudo myenv/bin/certbot --nginx -d <dns-name>.adacs-gpoole.cloud.edu.au
     ```
 
 * For a 1-time renewal:
