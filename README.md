@@ -220,7 +220,7 @@ In what follows, you will need the following, once the VM is instantiated:
     ```
 * Otherwise:
     ```
-    gunicorn <app_package_name>.app:app  -b 0.0.0.0:8080 -c ~/nectar_scripts/gunicorn_nectar_conf.py
+    gunicorn <app_package_name>.app:app  -c ~/nectar_scripts/gunicorn_nectar_conf.py
     ```
 
 ## FAQ
