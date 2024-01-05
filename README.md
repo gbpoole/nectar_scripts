@@ -210,22 +210,6 @@ In what follows, you will need the following, once the VM is instantiated:
 
 ## Run the app
 
-* Install Poetry.  Add to path:
-    ```
-    export PATH="/home/ubuntu/.local/bin:$PATH"
-    ```
-* Create a venv (if not done already):
-    ```
-    ~/nectar_scripts/scripts/create_venv.sh
-    ```
-* Source venv:
-    ```
-    source venv/bin/activate
-    ```
-* Install the app with:
-    ```
-    poetry install
-    ```
 * To use docker-compose to start the app (from the repo directory):
     ```
     sudo docker-compose up -d
