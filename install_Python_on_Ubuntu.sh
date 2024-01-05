@@ -22,6 +22,10 @@ sudo apt install python3.11-distutils
 curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
 sudo python3.11 get-pip.py
 pip install --upgrade pip
+if [ -f get-pip.py ]; then
+    # n.b.: write protected file
+    rm -f get-pip.py
+fi
 
 # Install some dependencies
 sudo apt install python3.11-venv python3.11-dev
