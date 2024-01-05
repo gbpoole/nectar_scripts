@@ -180,23 +180,14 @@ In what follows, you will need the following, once the VM is instantiated:
 
 ## Set-up a "Let's Encrypt" Certificate
 
-* Certbot only works with Python 3.5 to 3.8, so watch-out for the install of Python 3.10 above!
-* The following commands, for switching python3 versions might be handy:
-    ```
-    sudo update-alternatives --set python3 /usr/bin/python3.10
-    ```
-    ```
-    sudo update-alternatives --set python3 /usr/bin/python3.8
-    ```
-
 * Install and run certbot:
     ```
+    sudo apt-get install python3-certbot-nginx
     pip3 install certbot certbot-nginx
     ```
     ```
-    sudo env/bin/certbot --nginx -d <dns-name>.adacs-gpoole.cloud.edu.au
+    sudo certbot --nginx -d <dns-name>.adacs-gpoole.cloud.edu.au
     ```
-
 * For a 1-time renewal:
     ```
     sudo certbot renew
@@ -204,46 +195,20 @@ In what follows, you will need the following, once the VM is instantiated:
 
 ## Auto-renewal of SSL
 
-* Edit the following 2 files (`sudo vi`):
-
-    1. `/etc/systemd/system/certbot.service`
-
-        ```
-        [Unit]
-        Description=Let's Encrypt renewal
-
-        [Service]
-        Type=oneshot
-        ExecStart=/usr/bin/certbot renew --quiet --agree-tos
-        ExecStartPost=/bin/systemctl reload apache2.service
-        ```
-
-    2. `/etc/systemd/system/certbot.timer`
-
-        ```
-        [Unit]
-        Description=Twice daily renewal of Let's Encrypt's certificates
-
-        [Timer]
-        OnCalendar=0/12:00:00
-        RandomizedDelaySec=1h
-        Persistent=true
-
-        [Install]
-        WantedBy=timers.target
-        ```
-
-* Enable and start `certbot.timer`:
+* Copy a couple files into place:
     ```
-    systemctl enable --now certbot.timer
+    sudo cp ~/nectar_scripts/certbot_renewal.* /etc/systemd/system
     ```
-
+* Enable and start `certbot_renewal.timer`:
+    ```
+    systemctl enable --now certbot_renewal.timer
+    ```
 * Check the status of the timer
     ```
-    sudo systemctl status certbot.timer
+    sudo systemctl status certbot_renewal.timer
     ```
 
-## Run an app
+## Run the app
 
 * Install Poetry.  Add to path:
     ```
@@ -267,5 +232,5 @@ In what follows, you will need the following, once the VM is instantiated:
     ```
 * Otherwise:
     ```
-    gunicorn app.main:app -c gunicorn.nectar.conf.py
+    gunicorn <app_package_name>.app:app -c ~/nectar_scripts/gunicorn_nectar_conf.py
     ```
