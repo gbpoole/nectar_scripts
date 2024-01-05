@@ -120,12 +120,10 @@ In what follows, you will need the following, once the VM is instantiated:
 
 > [!NOTE]
 > If a "Duplicate Record Set" error is thrown, then you need to delete the old one first:
->
->     ```
->     openstack recordset delete <project>.cloud.edu.au.  <instance name>.<project>.cloud.edu.au.
->     ```
->
-> then, retry the openstack recordset create command above
+> ```  
+> openstack recordset delete <project>.cloud.edu.au.  <instance name>.<project>.cloud.edu.au.
+> ```
+> then, retry the openstack recordset create command above.
 
 ## Set-up Nginx
 
@@ -135,15 +133,11 @@ In what follows, you will need the following, once the VM is instantiated:
     ```
 	* You should see something like:
 
-        > Available applications:
-        >
-        >   Nginx Full
-        >
-        >   Nginx HTTP
-        >
-        >   Nginx HTTPS
-        >
-        >   OpenSSH
+        > Available applications:  
+        >   Nginx Full  
+        >   Nginx HTTP  
+        >   Nginx HTTPS  
+        >   OpenSSH  
 
 * Verify that Nginx was started at the install:
     ```
@@ -151,35 +145,21 @@ In what follows, you will need the following, once the VM is instantiated:
     ```
 	* You should see something like:
 
-        > ● nginx.service - A high performance web server and a reverse proxy server
-        >
-        >      Loaded: loaded (/lib/systemd/system/nginx.service; enabled; vendor preset: enabled)
-        >
-        >      Active: active (running) since Wed 2022-08-03 04:35:19 UTC; 3min 17s ago
-        >
-        >        Docs: man:nginx(8)
-        >
-        >     Process: 44621 ExecStartPre=/usr/sbin/nginx -t -q -g daemon on; master_process on; (code=exited, status=0/SUCCESS)
-        >
-        >     Process: 44631 ExecStart=/usr/sbin/nginx -g daemon on; master_process on; (code=exited, status=0/SUCCESS)
-        >
-        >    Main PID: 44632 (nginx)
-        >
-        >       Tasks: 2 (limit: 1144)
-        >
-        >      Memory: 5.1M
-        >
-        >      CGroup: /system.slice/nginx.service
-        >
-        >              ├─44632 nginx: master process /usr/sbin/nginx -g daemon on; master_process on;
-        >
-        >              └─44633 nginx: worker process
-        >
-        > 
-        >
-        > Aug 03 04:35:19 <dns-name> systemd[1]: Starting A high performance web server and a reverse proxy server...
-        >
-        > Aug 03 04:35:19 <dns-name> systemd[1]: Started A high performance web server and a reverse proxy server.
+        > ● nginx.service - A high performance web server and a reverse proxy server  
+        >      Loaded: loaded (/lib/systemd/system/nginx.service; enabled; vendor preset: enabled)  
+        >      Active: active (running) since Wed 2022-08-03 04:35:19 UTC; 3min 17s ago  
+        >        Docs: man:nginx(8)  
+        >     Process: 44621 ExecStartPre=/usr/sbin/nginx -t -q -g daemon on; master_process on; (code=exited, status=0/SUCCESS)  
+        >     Process: 44631 ExecStart=/usr/sbin/nginx -g daemon on; master_process on; (code=exited, status=0/SUCCESS)  
+        >    Main PID: 44632 (nginx)  
+        >       Tasks: 2 (limit: 1144)  
+        >      Memory: 5.1M  
+        >      CGroup: /system.slice/nginx.service  
+        >              ├─44632 nginx: master process /usr/sbin/nginx -g daemon on; master_process on;  
+        >              └─44633 nginx: worker process  
+        >  
+        > Aug 03 04:35:19 <dns-name> systemd[1]: Starting A high performance web server and a reverse proxy server...  
+        > Aug 03 04:35:19 <dns-name> systemd[1]: Started A high performance web server and a reverse proxy server.  
 
 * Copy Nginx config files into place:
     ```
